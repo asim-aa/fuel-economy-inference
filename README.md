@@ -1,2 +1,2 @@
-# Intro
+# project5
 Robust, assumption-light analysis of city MPG with blocked permutations and a power-simulation study comparing global vs. multiple-testing strategies. Reproducible via renv + Quarto; includes effect sizes, FWER/FDR control, and parallelized experiments.
