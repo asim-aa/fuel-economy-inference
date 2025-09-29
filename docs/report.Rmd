@@ -1,0 +1,36 @@
+---
+title: "Fuel Economy & Statistical Testing"
+author: "Asim Ahmed"
+date: "`r format(Sys.Date(), '%B %d, %Y')`"
+output:
+  pdf_document:
+    toc: true
+    number_sections: true
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
+fontsize: 11pt
+geometry: margin=1in
+---
+
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, fig.align = "center")
+library(dplyr); library(readr); library(ggplot2); library(knitr); library(broom)
+fig_dir   <- "../outputs/figures"
+tab_dir   <- "../outputs/tables"
+data_dir  <- "../data"
+read_if <- function(path) if (file.exists(path)) readr::read_csv(path, show_col_types = FALSE) else NULL
+
+Executive Summary
+
+Goal. Analyze how driveline and transmission relate to city MPG, and compare statistical tests via simulation.
+Methods. One-way ANOVA; blocked linear model + permutation logic; Kruskal–Wallis p-value comparison (asymptotic vs Monte Carlo); 10k-rep power study for Welch F vs pairwise Welch + Holm under sparse alternatives.
+Key Findings.
+
+FWD cars have higher city MPG than RWD/AWD (ANOVA, p ≪ 0.001).
+
+Controlling for transmission, FWD ≈ +6 MPG vs RWD; Manual ≈ +3 MPG vs Automatic (both p ≪ 0.001).
+
+KW: asymptotic ≈ Monte Carlo at n≈10 for type-I error and power.
+
+Pairwise Welch + Holm > Welch F for power when only one group mean shifts; both control type-I error.
